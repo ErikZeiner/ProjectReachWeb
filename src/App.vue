@@ -2,9 +2,7 @@
   <Experiment title="magpie demo">
     <InstructionScreen :title="'Welcome'">
       <p>Thank you for participating in the experiment. It should take you no more than about 10 min to complete.</p>
-      
       <p>Please make sure to wear headphones and be in a quiet environment without distractions – you need to be able to watch short videos with audio.</p>
-
       <p>Click on the button below to receive instructions.</p>
     </InstructionScreen>
 
