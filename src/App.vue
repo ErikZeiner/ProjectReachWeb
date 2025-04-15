@@ -1,15 +1,15 @@
 <template>
   <Experiment title="magpie demo">
     <InstructionScreen :title="'Welcome'">
-      <p>Thank you for participating in the experiment. It should take you no more than about 10 min to complete.</p>
-      <p>Please make sure to wear headphones and be in a quiet environment without distractions – you need to be able to watch short videos with audio.</p>
-      <p>Click on the button below to receive instructions.</p>
+    <p>Thank you for participating in this experiment! It should take no more than 10 minutes to complete.</p>
+    <p>Please ensure you are wearing headphones and are in a quiet environment free from distractions. You will need to watch short videos with audio during the experiment.</p>
+    <p>Click the button below to proceed to the instructions.</p>
     </InstructionScreen>
 
     <InstructionScreen :title="'Instructions'">
-      <p> You will be watching a series of short video clips of a speaker uttering simple sentences. The speaker will be framed form below the neck to the waist and you will not see their face.</p>
-      <p>Your task is to watch the clips (each will play twice) and answer accompanying questions using a slider marked ‘no’ at one end and ‘yes’ at the other based to what extent you????????. </p>
-      <p>First, you can practice on two clips. </p>
+      <p>In this experiment, you will watch a series of short video clips of a speaker uttering sentences. The speaker will be framed from below the neck to the waist, so their face will not be visible.</p>
+      <p>Your task is to watch each clip (each will play twice) and answer accompanying questions using a slider. The slider allows you to indicate your response on a scale between 'Yes' and 'No' and express how strongly you feel about your response. </p>
+      <p>Before starting the main task, you will have the opportunity to practice with two clips.</p>
     </InstructionScreen>
     
     <template v-for="(trial, i) of trainingTrials">
@@ -25,15 +25,16 @@
           <Record :data="{
                         target: trial.target,
                         variant: trial.variant,
+                        beat: 1
                       }" />
           
       </template>
-      
       </SliderScreen>
     </template>
     
     <InstructionScreen :title="'Instructions'">
-    <p> Lovely! Press next to start the experiment proper.</p>
+    <p> Lovely!</p>
+    <p>Now, please press NEXT to start the main task.</p>
     </InstructionScreen>
 
     <template v-for="(trial, i) of assignedTrials">
@@ -42,7 +43,8 @@
         :question="'Is the speaker asking whether ' + trial.content + '?'"
         initial="50"
         optionLeft="no"
-        optionRight="yes">
+        optionRight="yes"
+        :progress="i / assignedTrials.length">
       <template #stimulus>
           <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/raw/refs/heads/gh-pages/video/main/${trial.target}_${trial.variant}_${trial.beat}.mp4`" autoplay/>
           <Record :data="{
