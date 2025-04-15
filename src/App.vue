@@ -8,7 +8,7 @@
 
     <InstructionScreen :title="'Instructions'">
       <p> You will be watching a series of short video clips of a speaker uttering simple sentences. The speaker will be framed form below the neck to the waist and you will not see their face.</p>
-      <p>Your task is to watch the clips (each will play twice) and answer accompanying questions using a slider marked ‘no’ at one end and ‘yes’ at the other, </p>
+      <p>Your task is to watch the clips (each will play twice) and answer accompanying questions using a slider marked ‘no’ at one end and ‘yes’ at the other based to what extent you????????. </p>
       <p>First, you can practice on two clips. </p>
     </InstructionScreen>
     
