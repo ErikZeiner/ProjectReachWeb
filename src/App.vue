@@ -20,7 +20,7 @@
         optionLeft="no"
         optionRight="yes">
       <template #stimulus>
-          <video :src="`/video/training/${trial.target}_${trial.variant}.mp4`" autoplay/>
+          <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/blob/gh-pages/video/training/${trial.target}_${trial.variant}.mp4`" autoplay/>
           <Record :data="{
                         target: trial.target,
                         variant: trial.variant,
@@ -43,7 +43,7 @@
         optionLeft="no"
         optionRight="yes">
       <template #stimulus>
-          <video :src="`/video/main/${trial.target}_${trial.variant}_${trial.beat}.mp4`" autoplay/>
+          <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/blob/gh-pages/video/main/${trial.target}_${trial.variant}_${trial.beat}.mp4`" autoplay/>
           <Record :data="{
                         target: trial.target,
                         variant: trial.variant,
