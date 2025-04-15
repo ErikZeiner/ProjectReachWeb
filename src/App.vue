@@ -56,7 +56,7 @@
     <PostTestScreen :education="false" />
     
     
-      <DebugResultsScreen/>
+    <SubmitResultsScreen />
   </Experiment>
 </template>
 
