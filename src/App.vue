@@ -77,11 +77,6 @@ export default {
       participantIndex:0
     }
   },
-  mounted() {
-    const id = this.$root.magpie?.participant_id || "anon0";
-    this.participantIndex = parseInt(id.match(/\d+/)?.[0]) || 0;
-    console.log(id, this.participantIndex);
-  },
   methods: {
     shuffleArray(array) {
       const shuffled = [...array];
@@ -105,19 +100,23 @@ export default {
         
         const assigned = [];
         
-        Object.entries(grouped).forEach(([target, variants], i) => {
-          // Sort so A is index 0, B is index 1
-          variants.sort((a, b) => a.variant.localeCompare(b.variant));
-          
-          // Decide which variant gets the video
-          const videoIndex = (this.participantIndex + i) % 2;
-          
-          variants.forEach((trial, j) => {
+        Object.entries(grouped).forEach(([target, variants]) => {
+          if (variants.length > 1) {
+            // Randomly decide which of the multiple variants gets beat = 1
+            const randomIndex = Math.floor(Math.random() * variants.length);
+            variants.forEach((trial, index) => {
             assigned.push({
               ...trial,
-              beat: j === videoIndex ? 1 : 0
+              beat: index === randomIndex ? 1 : 0
+              });
+            });}
+          else {
+            // Randomly assign beat 0 or 1 for single-variant targets
+            assigned.push({
+              ...variants[0],
+              beat: Math.round(Math.random()) // Generates 0 or 1 randomly
             });
-          });
+          }
         });
         
         // Shuffle full trial list
