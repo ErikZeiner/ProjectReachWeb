@@ -1,5 +1,6 @@
 <template>
   <Experiment title="magpie demo">
+  
     <InstructionScreen :title="'Welcome'">
     <p>Thank you for participating in this experiment! It should take no more than 10 minutes to complete.</p>
     <p>Please ensure you are wearing headphones and are in a quiet environment free from distractions. You will need to watch short videos with audio during the experiment.</p>
@@ -8,32 +9,30 @@
 
     <InstructionScreen :title="'Instructions'">
       <p>In this experiment, you will watch a series of short video clips of a speaker uttering sentences. The speaker will be framed from below the neck to the waist, so their face will not be visible.</p>
-      <p>Your task is to watch each clip (each will play twice) and answer accompanying questions using a slider. The slider allows you to indicate your response on a scale between 'Yes' and 'No' and express how strongly you feel about your response. </p>
-      <p>Before starting the main task, you will have the opportunity to practice with two clips.</p>
+      <p>Your task is to watch each clip (each will play twice) and answer accompanying questions using a slider. The slider allows you to indicate your response on a scale between 'yes' and 'no' and express how strongly you feel about your response. </p>
+      <p>Before starting the main task, you will practice with two clips.</p>
     </InstructionScreen>
     
     <template v-for="(trial, i) of trainingTrials">
       <SliderScreen
         :key = "i"
         :question="'Is the speaker asking whether ' + trial.content + '?'"
-        initial="50"
+        :initial=50
         optionLeft="no"
         optionRight="yes">
       <template #stimulus>
-
           <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/raw/refs/heads/gh-pages/video/training/${trial.target}_${trial.variant}.mp4`" autoplay/>
           <Record :data="{
                         target: trial.target,
                         variant: trial.variant,
                         beat: 1
                       }" />
-          
       </template>
       </SliderScreen>
     </template>
     
     <InstructionScreen :title="'Instructions'">
-    <p> Lovely!</p>
+    <p> Lovely! You are all set.</p>
     <p>Now, please press NEXT to start the main task.</p>
     </InstructionScreen>
 
@@ -41,25 +40,25 @@
       <SliderScreen
         :key = "i"
         :question="'Is the speaker asking whether ' + trial.content + '?'"
-        initial="50"
+        :initial=50
         optionLeft="no"
         optionRight="yes"
         :progress="i / assignedTrials.length">
-      <template #stimulus>
-          <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/raw/refs/heads/gh-pages/video/main/${trial.target}_${trial.variant}_${trial.beat}.mp4`" autoplay/>
-          <Record :data="{
-                        target: trial.target,
-                        variant: trial.variant,
-                        beat: trial.beat,
-                      }" />
-      </template>
+        <template #stimulus>
+            <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/raw/refs/heads/gh-pages/video/main/${trial.target}_${trial.variant}_${trial.beat}.mp4`" autoplay/>
+            <Record :data="{
+                          target: trial.target,
+                          variant: trial.variant,
+                          beat: trial.beat,
+                        }" />
+        </template>
       </SliderScreen>
     </template>
 
     <PostTestScreen :education="false" />
     
-    
     <SubmitResultsScreen />
+    
   </Experiment>
 </template>
 
@@ -81,6 +80,7 @@ export default {
   mounted() {
     const id = this.$root.magpie?.participant_id || "anon0";
     this.participantIndex = parseInt(id.match(/\d+/)?.[0]) || 0;
+    console.log(id, this.participantIndex);
   },
   methods: {
     shuffleArray(array) {
