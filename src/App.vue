@@ -4,7 +4,7 @@
     <InstructionScreen :title="'Welcome'">
     <p>Thank you for participating in this experiment! It should take no more than 10 minutes to complete.</p>
     <p>Please ensure you are wearing headphones and are in a quiet environment free from distractions. You will need to watch short videos with audio during the experiment.</p>
-    <p>Click the button below to proceed to the instructions.</p>
+    <p>Click the button below to see the instructions.</p>
     </InstructionScreen>
 
     <InstructionScreen :title="'Instructions'">
@@ -33,7 +33,7 @@
     
     <InstructionScreen :title="'Instructions'">
     <p> Lovely! You are all set.</p>
-    <p>Now, please press NEXT to start the main task.</p>
+    <p>Now, click the button below to start the main task.</p>
     </InstructionScreen>
 
     <template v-for="(trial, i) of assignedTrials">
