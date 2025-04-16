@@ -11,7 +11,7 @@
       <p>In this experiment, you will watch a series of short video clips of a speaker uttering sentences. The speaker will be framed from below the neck to the waist, so their face will not be visible.</p>
       <p>Your task is to watch each clip (each will play twice) and answer accompanying questions using a slider. The slider allows you to indicate your response on a scale between 'yes' and 'no' and express how strongly you feel about your response. </p>
       <p>Before starting the main task, you will practice with two clips.</p>
-      <p>NOTE: If you don't see the clips rightaway, they might be loading and appear in a few seconds.</p>
+      <p>NOTE: If you don't see the clips right away, they might be loading and appear in a few seconds.</p>
     </InstructionScreen>
     
     <template v-for="(trial, i) of trainingTrials">
