@@ -77,16 +77,6 @@ export default {
       participantIndex:0
     }
   },
-  methods: {
-    shuffleArray(array) {
-      const shuffled = [...array];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      return shuffled;
-    }
-  },
   computed: {
       assignedTrials() {
         // Group by target
@@ -101,26 +91,17 @@ export default {
         const assigned = [];
         
         Object.entries(grouped).forEach(([target, variants]) => {
-          if (variants.length > 1) {
-            // Randomly decide which of the multiple variants gets beat = 1
+            // Randomly decide which of the variants gets beat
             const randomIndex = Math.floor(Math.random() * variants.length);
             variants.forEach((trial, index) => {
             assigned.push({
               ...trial,
               beat: index === randomIndex ? 1 : 0
               });
-            });}
-          else {
-            // Randomly assign beat 0 or 1 for single-variant targets
-            assigned.push({
-              ...variants[0],
-              beat: Math.round(Math.random()) // Generates 0 or 1 randomly
             });
-          }
         });
         
-        // Shuffle full trial list
-        return this.shuffleArray(assigned);
+        return _.shuffle(assigned);
       }
     }
 }
