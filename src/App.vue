@@ -11,25 +11,30 @@
       <p>In this experiment, you will watch a series of short video clips of a speaker uttering sentences. The speaker will be framed from below the neck to the waist, so their face will not be visible.</p>
       <p>Your task is to watch each clip (each will play twice) and answer accompanying questions using a slider. The slider allows you to indicate your response on a scale between 'yes' and 'no' and express how strongly you feel about your response. </p>
       <p>Before starting the main task, you will practice with two clips.</p>
-      <p>NOTE: If you don't see the clips right away, they might be loading and appear in a few seconds.</p>
+      <p>NOTE: If you don't see the clips right away, they might be loading and will appear in a few seconds.</p>
     </InstructionScreen>
     
     <template v-for="(trial, i) of trainingTrials">
-      <SliderScreen
-        :key = "i"
-        :question="'Is the speaker asking whether ' + trial.content + '?'"
-        :initial=50
-        optionLeft="no"
-        optionRight="yes">
-      <template #stimulus>
-          <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/raw/refs/heads/gh-pages/video/training/${trial.target}_${trial.variant}.mp4`" autoplay/>
-          <Record :data="{
-                        target: trial.target,
-                        variant: trial.variant,
-                        beat: 1
-                      }" />
-      </template>
-      </SliderScreen>
+      <Screen>
+          <Slide>
+                <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/raw/refs/heads/gh-pages/video/training/${trial.target}_${trial.variant}.mp4`" autoplay/>
+                <Record :data="{
+                              target: trial.target,
+                              variant: trial.variant,
+                              beat: 1
+                            }" />
+                            
+            <p>Is the speaker asking whether {{trial.content}}?</p>
+            
+            <SliderInput
+                :initial=50
+                left="no"
+                right="yes"
+                :response.sync= "$magpie.measurements.response" />
+
+            <button @click="$magpie.saveAndNextScreen();">Submit</button>
+          </Slide>
+      </Screen>
     </template>
     
     <InstructionScreen :title="'Instructions'">
@@ -38,22 +43,27 @@
     </InstructionScreen>
 
     <template v-for="(trial, i) of assignedTrials">
-      <SliderScreen
-        :key = "i"
-        :question="'Is the speaker asking whether ' + trial.content + '?'"
-        :initial=50
-        optionLeft="no"
-        optionRight="yes"
-        :progress="i / assignedTrials.length">
-        <template #stimulus>
-            <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/raw/refs/heads/gh-pages/video/main/${trial.target}_${trial.variant}_${trial.beat}.mp4`" autoplay/>
-            <Record :data="{
-                          target: trial.target,
-                          variant: trial.variant,
-                          beat: trial.beat,
-                        }" />
-        </template>
-      </SliderScreen>
+      <Screen
+      :progress="i / assignedTrials.length">
+          <Slide>
+                <video :src="`https://github.com/ErikZeiner/ProjectReachWeb/raw/refs/heads/gh-pages/video/main/${trial.target}_${trial.variant}_${trial.beat}.mp4`" autoplay/>
+                <Record :data="{
+                              target: trial.target,
+                              variant: trial.variant,
+                              beat: trial.beat
+                            }" />
+                            
+            <p>Is the speaker asking whether {{trial.content}}?</p>
+            
+            <SliderInput
+                :initial=50
+                left="no"
+                right="yes"
+                :response.sync= "$magpie.measurements.response" />
+                
+            <button @click="$magpie.saveAndNextScreen();">Submit</button>
+          </Slide>
+      </Screen>
     </template>
 
     <PostTestScreen :education="false" />

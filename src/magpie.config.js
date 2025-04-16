@@ -1,6 +1,6 @@
 export default {
   mode: 'directLink',
-  experimentId: '2',
+  experimentId: '3',
   serverUrl: 'https://ProjectReach.gigalixirapp.com',
   socketUrl: 'wss://ProjectReach.gigalixirapp.com/socket',
   // this will be used in prolific mode
