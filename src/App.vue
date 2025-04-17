@@ -3,7 +3,7 @@
   
     <InstructionScreen :title="'Welcome'">
     <p>Thank you for participating in this experiment! It should take no more than 10 minutes to complete.</p>
-    <p>Please ensure you are wearing headphones and are in a quiet environment free from distractions. You will need to watch short videos with audio during the experiment.</p>
+    <p>Please ensure you are wearing headphones and are in a quiet environment free from distractions. You will need to watch short videos with audio during the experiment. The interface is not optimised for smaller screens – if you are using a phone, you might need to scroll to see the whole screen.</p>
     <p>Click the button below to see the instructions.</p>
     </InstructionScreen>
 
